@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { updateTodo } from "@/redux/todoSlice";
-import { updateTodo as dbUpdateTodo, Todo } from "@/db/sqlite";
+import { updateTodo as dbUpdateTodo, getTodos, Todo } from "@/db/sqlite";
 import { AppDispatch } from "@/redux/store";
 import * as Animatable from "react-native-animatable";
 import { Ionicons } from "@expo/vector-icons";
@@ -47,13 +47,12 @@ const EditScreen: React.FC = () => {
     { resetForm }: FormikHelpers<FormValues>
   ) => {
     await dbUpdateTodo(db, values.id, values.title, values.description);
-    dispatch(
-      updateTodo({
-        id: values.id,
-        title: values.title,
-        description: values.description,
-      })
-    );
+
+    const todos = await getTodos(db);
+    const updatedTodo = todos.find((todo) => todo.id === values.id);
+    if (updatedTodo) {
+      dispatch(updateTodo(updatedTodo)); // Dispatch with full Todo object including timestamp
+    }
     resetForm();
     router.back();
   };

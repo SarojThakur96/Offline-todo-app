@@ -14,18 +14,16 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     setTodos: (state, action: PayloadAction<Todo[]>) => {
-      state.items = action.payload;
+      state.items = action.payload; // Already sorted by timestamp from SQLite
     },
     addTodo: (state, action: PayloadAction<Todo>) => {
-      // Add new todo to the beginning of the array
       state.items.unshift(action.payload);
     },
     updateTodo: (state, action: PayloadAction<Todo>) => {
-      // Remove the old version of the todo and add the updated one to the top
       const index = state.items.findIndex((t) => t.id === action.payload.id);
       if (index !== -1) {
-        state.items.splice(index, 1); // Remove the old item
-        state.items.unshift(action.payload); // Add updated item to the top
+        state.items.splice(index, 1);
+        state.items.unshift(action.payload);
       }
     },
     removeTodo: (state, action: PayloadAction<number>) => {
