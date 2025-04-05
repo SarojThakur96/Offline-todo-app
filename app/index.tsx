@@ -8,9 +8,9 @@ import { RootState, AppDispatch } from "@/redux/store";
 import * as Animatable from "react-native-animatable";
 import { Ionicons } from "@expo/vector-icons";
 import { useSQLiteContext } from "expo-sqlite";
-import { Href, Link } from "expo-router";
+import { Link } from "expo-router";
 import { getTodos } from "@/db/sqlite";
-import { RootStackParamList } from "@/types/navigation";
+
 const HomeScreen: React.FC = () => {
   const todos = useSelector((state: RootState) => state.todos.items);
   const dispatch = useDispatch<AppDispatch>();

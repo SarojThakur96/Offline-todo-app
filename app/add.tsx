@@ -44,7 +44,7 @@ const AddScreen = () => {
     if (newTodo) {
       dispatch(addTodo(newTodo)); // Dispatch with full Todo object including timestamp
     }
-    // dispatch(addTodo({ id, ...values }));
+
     resetForm();
     router.back();
   };

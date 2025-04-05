@@ -14,7 +14,7 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     setTodos: (state, action: PayloadAction<Todo[]>) => {
-      state.items = action.payload; // Already sorted by timestamp from SQLite
+      state.items = action.payload;
     },
     addTodo: (state, action: PayloadAction<Todo>) => {
       state.items.unshift(action.payload);
